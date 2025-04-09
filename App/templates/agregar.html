@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agregar Datos de Usuario</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="static/css2/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <br><br>
+            <h1 class="header center light-blue-text">Agregar Datos de Usuario</h1>
+            <div class="row center">
+                <h5 class="header col s12 light">Por favor rellene con los datos del nuevo usuario
+                <br>
+                </h5>
+              </div>
+            <form id="agregarForm" method="post" action="/agregar">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="nombre"><b>Ingrese su nombre:</b></label>
+                        <br>
+                        <input placeholder="Nombre" type="text" name="nombre" id="nombre" required>
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="apellido"><b>Ingrese su apellido:</b></label>
+                        <br>
+                        <input placeholder="Apellido" type="text" name="apellido" id="apellido" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="ciudad"><b>Ingrese su ciudad:</b></label>
+                        <br>
+                        <input placeholder="Ciudad" type="text" name="ciudad" id="ciudad" required>
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="nombre_finca"><b>Ingrese el nombre de la finca:</b></label>
+                        <br>
+                        <input placeholder="Nombre de la finca" type="text" name="nombre_finca" id="nombre_finca" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="provincia"><b>Ingrese su provincia:</b></label>
+                        <br>
+                        <input placeholder="Provincia" type="text" name="provincia" id="provincia" required>
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="canton"><b>Ingrese el cantón:</b></label>
+                        <br>
+                        <input placeholder="Cantón" type="text" name="canton" id="canton" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="recinto"><b>Ingrese su recinto:</b></label>
+                        <br>
+                        <input placeholder="Recinto" type="text" name="recinto" id="recinto" required>
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="parroquia"><b>Ingrese la parroquia:</b></label>
+                        <br>
+                        <input placeholder="Parroquia" type="text" name="parroquia" id="parroquia" required>
+                    </div>
+                    <div class="row">
+                    <div class="input-field col s6">
+                        <label for="ct_k510ha"><b>Ingrese la superficie sembrada en hectareas:</b></label>
+                        <br>
+                        <input placeholder="Superficie sembrada en hectareas" type="number" name="ct_k510ha" id="ct_k510ha" step="any" required>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <p><b>¿Preparación de suelo realizada?</b></p>
+                        <div>
+                            <label>
+                                <input type="radio" name="ct_prepa_suelo" value="1" required>
+                                <span>Sí</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_prepa_suelo" value="2" required>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="ct_k511ha"><b>Ingrese la superficie cosechada en hectareas:</b></label>
+                        <br>
+                        <input placeholder="Superficie cosechada en hectareas" type="number" name="ct_k511ha" id="ct_k511ha" step="any" required>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <p><b>Seleccione aquella que afectó su producción</b></p>
+                        <div>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="1" required>
+                                <span>Sequías</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="2" required>
+                                <span>Plagas</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="3" required>
+                                <span>Inundación</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="4" required>
+                                <span>Semillas</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="5" required>
+                                <span>Prácticas inadecuadas</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="6" required>
+                                <span>Edad de la Plantación</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="7" required>
+                                <span>Otra</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="su_fertilizada"><b>Ingrese la superficie fertilizada en hectareas:</b></label>
+                        <br>
+                        <input placeholder="Superficie fertilizada en hectareas" type="number" name="su_fertilizada" id="su_fertilizada" step="any" required>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <p><b>¿Riego Realizado?</b></p>
+                        <div>
+                            <label>
+                                <input type="radio" name="ct_riego" value="1" required>
+                                <span>Sí</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_riego" value="2" required>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="ct_fqui_npk"><b>Ingrese la cantidad de fertilizante NPK en libras:</b></label>
+                        <br>
+                        <input placeholder="Fertilizante quimico NPK en libras" type="number" name="ct_fqui_npk" id="ct_fqui_npk" step="any" required>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <p><b>¿Uso de Fertilizante quimico?</b></p>
+                        <div>
+                            <label>
+                                <input type="radio" name="ct_fqui" value="1" required>
+                                <span>Sí</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_fqui" value="2" required>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="su_plaguicidas"><b>Ingrese las hectareas de plaguicidas usado:</b></label>
+                        <br>
+                        <input placeholder="Superficie cubierta de plaguicidas en hectareas" type="number" name="su_plaguicidas" id="su_plaguicidas" step="any" required>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <p><b>¿Uso de plaguicidas?</b></p>
+                        <div>
+                            <label>
+                                <input type="radio" name="ct_pqui" value="1" required>
+                                <span>Sí</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_pqui" value="2" required>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="ventas"><b>Ingrese las ventas proyectadas en hectareas:</b></label>
+                        <br>
+                        <input placeholder="Ventas proyectadas en hectareas" type="number" name="ventas" id="ventas" step="any" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="resultado_prediccion"><b>Cual fue el resultado de la prediccion?:</b></label>
+                        <br>
+                        <input placeholder="Resultado de la prediccion" type="number" name="resultado_prediccion" id="resultado_prediccion" step="any" required>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="comentario"><b>Algun comentario?:</b></label>
+                        <br>
+                        <input placeholder="Escriba aqui su comentario" type="text" name="comentario" id="comentario" step="any" required>
+                    </div>
+                </div>
+
+
+
+                </div>
+                <div class="row center">
+                    <!-- Cambiar el tipo de botón de 'submit' a 'button' para manejar el envío con JavaScript -->
+                    <button type="button" class="btn-large waves-effect waves-light red" onclick="volver()">Volver<i class="material-icons right">keyboard_return</i></button>
+                    <button type="submit" class="btn-large waves-effect waves-light light-blue" onclick="agregar()">Guardar<i class="material-icons right">save</i></button>
+                </div>
+            </form>
+
+            <script>
+                function volver() {
+                    // Redirigir al usuario a la página de administración (admin.html) al presionar el botón "Volver"
+                    window.location.href = 'admin';
+                }
+
+                function agregar() {
+                    // Obtener los valores de los campos del formulario
+                    const nombre = document.getElementById('nombre').value;
+                    const apellido = document.getElementById('apellido').value;
+                    const ciudad = document.getElementById('ciudad').value;
+                    const provincia = document.getElementById('provincia').value;
+                    const recinto = document.getElementById('recinto').value;
+                    const nombre_finca = document.getElementById('nombre_finca').value;
+                    const canton = document.getElementById('canton').value;
+                    const parroquia = document.getElementById('parroquia').value;
+
+                    const ct_prepa_suelo = document.getElementById('ct_prepa_suelo').value;
+                    const ct_k510ha = document.getElementById('ct_k510ha').value;
+                    const ct_k511ha = document.getElementById('ct_k511ha').value;
+                    const ct_afecta_prod = document.getElementById('ct_afecta_prod').value;
+                    const ct_riego = document.getElementById('ct_riego').value;
+                    const su_fertilizada = document.getElementById('su_fertilizada').value;
+                    const ct_fqui = document.getElementById('ct_fqui').value;
+                    const ct_fqui_npk = document.getElementById('ct_fqui_npk').value;
+                    const ct_pqui = document.getElementById('ct_pqui').value;
+                    const su_plaguicidas = document.getElementById('su_plaguicidas').value;
+                    const ventas = document.getElementById('ventas').value;
+                    const resultado_prediccion = document.getElementById('resultado_prediccion').value;
+                    const comentario = document.getElementById('comentario').value;
+
+
+
+                    // Verificar si todos los campos están llenos
+                    if (nombre && apellido && ciudad && provincia && recinto && nombre_finca && canton && parroquia) {
+                        // Crear un objeto con los datos del usuario a agregar
+                        const datosUsuario = {
+                            nombre: nombre,
+                            apellido: apellido,
+                            ciudad: ciudad,
+                            provincia: provincia,
+                            recinto: recinto,
+                            nombre_finca: nombre_finca,
+                            canton: canton,
+                            ct_prepa_suelo: ct_prepa_suelo,
+                            ct_k510ha: ct_k510ha,
+                            ct_k511ha: ct_k511ha,
+                            ct_afecta_prod: ct_afecta_prod,
+                            ct_riego: ct_riego,
+                            su_fertilizada: su_fertilizada,
+                            ct_fqui: ct_fqui,
+                            ct_fqui_npk: ct_fqui_npk,
+                            ct_pqui: ct_pqui,
+                            su_plaguicidas: su_plaguicidas,
+                            ventas: ventas,
+                            resultado_prediccion: resultado_prediccion,
+                            comentario: comentario
+
+
+                        };
+
+                        // Enviar los datos del formulario al servidor Flask utilizando Fetch API
+                        fetch('/agregar', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(datosUsuario)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Redirigir al usuario a la página de administración (admin.html) después de agregar los datos
+                            window.location.href = 'admin';
+                        })
+
+                    } else {
+                        // Mostrar un mensaje de alerta si no se han completado todos los campos
+                        alert('Por favor, llene todos los campos antes de guardar.');
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</body>
+</html>

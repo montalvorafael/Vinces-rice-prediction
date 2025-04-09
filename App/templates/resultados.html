@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Resultados de la Predicción</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="static/css2/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+</head>
+
+<body>
+<div id="mensajeExito" class="mensaje-exito" style="display: none;"></div>
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <br><br>
+            <h1 class="header center light-blue-text">Predictor de la producción anual de arroz en Vinces</h1>
+            <div class="row center">
+                <h5 class="header col s12 light">En base a los datos proporcionados la prediccion anual es de:</h5>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s8">
+                <h2 id="prediccionResultado"> </h2>
+                </div>
+                <div class="input-field col s3">
+                <h5 class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" onclick="mostrarContenido('porcentaje')" ></h5>
+                 <div class="card-content">
+                     <div id="porcentaje-content" class="card-content-hidden input-field col s12">
+                         <p>Porcentaje de Acierto del predictor en base a los entrenamientos realizados</p>
+                     </div>
+                 </div>
+                </div>
+
+            <!-- Título de "Meses óptimos de cosecha" -->
+            <div class="row center">
+
+            </div>
+            <div class="row center">
+                 <h4 class="meses-titulo">Meses óptimos de cosecha:</h4>
+                <h5 class="header col s12 light">A continuación se muestran aquellos meses óptimos para la cosecha de arroz
+                    y sus variables climáticas más representativas:</h5>
+            </div>
+
+            <!-- Nuevos recuadros para FEBRERO, MARZO y ABRIL -->
+            <div class="row">
+                <div class="col s4 center">
+                    <div class="card" onclick="mostrarContenido('febrero')">
+                        <div class="card-content">
+                            <span class="card-title resaltar-negrita"><b>FEBRERO</b></span>
+                            <div id="febrero-content" class="card-content-hidden">
+                                <p>Temperatura: 24.97°C</p>
+                                <p>Humedad: 69.46%</p>
+                                <p>Precipitación: 8.21 mm</p>
+                                <p>Radiacación: 148.54 Wm^-2 </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4 center">
+                    <div class="card" onclick="mostrarContenido('marzo')">
+                        <div class="card-content">
+                            <span class="card-title resaltar-negrita"><b>MARZO</b></span>
+                            <div id="marzo-content" class="card-content-hidden">
+                                <p>Temperatura: 24.56°C</p>
+                                <p>Humedad: 69.18%</p>
+                                <p>Precipitación: 9.31 mm</p>
+                                <p>Radiacación: 146.92 Wm^-2 </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4 center">
+                    <div class="card" onclick="mostrarContenido('abril')">
+                        <div class="card-content">
+                            <span class="card-title resaltar-negrita"><b>ABRIL</span></b>
+                            <div id="abril-content" class="card-content-hidden">
+                                <p>Temperatura: 24.91°C</p>
+                                <p>Humedad: 69.15%</p>
+                                <p>Precipitación: 5.46 mm</p>
+                                <p>Radiacación: 157.03 Wm^-2 </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                 <div class="comment-box-container">
+                    <h6><b>¿Tiene algún comentario?</b></h6>
+                    <br>
+                    <input type="text" id="comentario" placeholder="Escriba aquí su comentario">
+                    <a href="#" class="btn waves-effect waves-light" onclick="enviarComentario('{{ usuario.id }}')">Enviar</a>
+                </div>
+
+                            <!-- Botón "Regresar" -->
+            <div class="row center">
+                <a button  type="submit" href="/login" class="btn-large waves-effect waves-light red">Volver al Inicio<i class="material-icons right">home</i></button></a>
+                <a button  type="submit" href="/index" class="btn-large waves-effect waves-light orange">Regresar al formulario<i class="material-icons right">keyboard_return</i></button></a>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Función para mostrar el contenido oculto con efecto de despliegue hacia abajo
+        function mostrarContenido(mes) {
+            const content = $(`#${mes}-content`);
+            if (content.is(':hidden')) {
+                content.slideDown();
+            } else {
+                content.slideUp();
+            }
+        }
+
+        // Obtener el resultado de la predicción del localStorage
+        const resultadoPrediccion = localStorage.getItem('resultadoPrediccion');
+        if (resultadoPrediccion !== null) {
+            document.getElementById('prediccionResultado').textContent = parseFloat(resultadoPrediccion).toFixed(2) + " Toneladas métricas";
+        }
+
+function enviarComentario(usuarioId) {
+    const comentario = document.getElementById('comentario').value;
+
+    if (comentario) {
+        fetch(`/enviar_comentario?id=${usuarioId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ comentario: comentario })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Mostrar el mensaje de éxito
+            document.getElementById('mensajeExito').style.display = 'block';
+            // Mostrar una alerta
+            alert('Comentario enviado con éxito!');
+            // Borrar el contenido del campo de comentario
+            document.getElementById('comentario').value = '';
+        })
+        .catch(error => {
+            console.error('Error al enviar el comentario:', error);
+        });
+    }
+}
+
+
+    </script>
+</body>
+</html>
+
+
+

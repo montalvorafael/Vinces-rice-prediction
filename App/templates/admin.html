@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Administración de Usuarios</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="static/css2/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <style>
+        /* Estilos personalizados para DataTables */
+        #userTable {
+            font-size: 12px;
+        }
+        #userTable thead th {
+            font-weight: bold;
+            white-space: nowrap;
+            text-align: center;
+        }
+        #userTable tbody td {
+            text-align: center;
+            font-size: 15px;
+        }
+        /* Estilos adicionales para hacer la tabla más compacta */
+        .dataTables_wrapper {
+            padding-top: 0;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <div class="section no-pad-bot" id="index-banner">
+        <br><br>
+        <h1 class="header center light-blue-text">Administración de Usuarios</h1>
+        <div class="row center">
+            <h5 class="header col s12 light">Lista de usuarios registrados</h5>
+        </div>
+        <div class="row center">
+            <table id="userTable" class="display">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Ciudad</th>
+                        <th>Provincia</th>
+                        <th>Recinto</th>
+                        <th>Nombre Finca</th>
+                        <th>Cantón</th>
+                        <th>Parroquia</th>
+                        <th>Preparación de Suelo</th>
+                        <th>Superficie Sembrada (Hectareas)</th>
+                        <th>Superficie Cosechada (Hectareas)</th>
+                        <th>Impacto en Producción</th>
+                        <th>Riego Realizado</th>
+                        <th>Superficie Fertilizada (Hectareas)</th>
+                        <th>Fertilizante Químico</th>
+                        <th>Cantidad Fertilizante NPK (Libras)</th>
+                        <th>Uso de Plaguicidas</th>
+                        <th>Superficie Cubierta de Plaguicidas (Hectareas)</th>
+                        <th>Ventas Proyectadas (Hectareas)</th>
+                        <th>Resultado Predicción</th>
+                        <th>Comentarios</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in data %}
+                    <tr>
+                        <td>{{ usuario.id }}</td>
+                        <td>{{ usuario.nombre }}</td>
+                        <td>{{ usuario.apellido }}</td>
+                        <td>{{ usuario.ciudad }}</td>
+                        <td>{{ usuario.provincia }}</td>
+                        <td>{{ usuario.recinto }}</td>
+                        <td>{{ usuario.nombre_finca }}</td>
+                        <td>{{ usuario.canton }}</td>
+                        <td>{{ usuario.parroquia }}</td>
+                        <td>{{ usuario.ct_prepa_suelo }}</td>
+                        <td>{{ usuario.ct_k510ha }}</td>
+                        <td>{{ usuario.ct_k511ha }}</td>
+                        <td>{{ usuario.ct_afecta_prod }}</td>
+                        <td>{{ usuario.ct_riego }}</td>
+                        <td>{{ usuario.su_fertilizada }}</td>
+                        <td>{{ usuario.ct_fqui }}</td>
+                        <td>{{ usuario.ct_fqui_npk }}</td>
+                        <td>{{ usuario.ct_pqui }}</td>
+                        <td>{{ usuario.su_plaguicidas }}</td>
+                        <td>{{ usuario.ventas }}</td>
+                        <td>{{ usuario.resultado_prediccion }}</td>
+                        <td>{{ usuario.comentario }}</td>
+                        <td>
+                            <button class="btn-small waves-effect waves-light blue edit-button" data-user-id="{{ usuario.id }}"><i class="material-icons left">edit</i></button>
+                            <a href="/eliminar/{{ usuario.id }}" class="btn-small waves-effect waves-light red"><i class="material-icons left">delete</i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="row center">
+            <a href="#" class="btn-large waves-effect waves-light green" id="descargarBtn"><i class="material-icons left">cloud_download</i>Descargar como .csv</a>
+            <a href="/agregar" class="btn-large waves-effect waves-light light-blue"><i class="material-icons left">add</i>Agregar Nuevo Usuario</a>
+            <a href="/login" class="btn-large waves-effect waves-light red"><i class="material-icons left">exit_to_app</i>Cerrar Sesión</a>
+        </div>
+    </div>
+    <div id="editModal" class="modal">
+        <div class="modal-content" id="modal_sup">
+            <input type="hidden" name="identificador" id="identificador">
+            <h4>Editar Usuario</h4>
+            <form id="editForm">
+                <!-- Agrega campos de edición para los datos del usuario -->
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+            <button type="button" id="guardarBtn" class="modal-close waves-effect waves-green btn-flat">Guardar</button>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#userTable').DataTable({
+                paging: true,
+                lengthChange: false,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: false,
+                language: {
+                    search: "Buscar:",
+                    zeroRecords: "No se encontraron resultados",
+                    info: "Mostrando _START_ al _END_ de _TOTAL_ registros",
+                    infoEmpty: "Mostrando 0 al 0 de 0 registros",
+                    infoFiltered: "(filtrados de _MAX_ registros en total)",
+                    paginate: {
+                        first: "Primero",
+                        last: "Último",
+                        next: "Siguiente",
+                        previous: "Anterior"
+                    }
+                }
+            });
+        });
+        $(document).ready(function() {
+            // Inicializar DataTables
+            $('#userTable').DataTable();
+
+            const modal = document.querySelector('#editModal');
+            const editButtons = document.querySelectorAll('.edit-button');
+            const modalInstance = M.Modal.init(modal);
+
+            editButtons.forEach(button => {
+                button.addEventListener('click', async function() {
+                    const userId = button.dataset.userId;
+                    const response = await fetch(`/get_user/${userId}`);
+                    const userData = await response.json();
+
+                    const form = document.querySelector('#editForm');
+                    form.innerHTML = '';
+
+                    const inputFields = [
+                        'nombre', 'apellido', 'ciudad', 'provincia', 'recinto', 'nombre_finca',
+                        'canton', 'parroquia', 'ct_prepa_suelo', 'ct_k510ha', 'ct_k511ha',
+                        'ct_afecta_prod', 'ct_riego', 'su_fertilizada', 'ct_fqui', 'ct_fqui_npk',
+                        'ct_pqui', 'su_plaguicidas', 'ventas', 'resultado_prediccion' , 'comentario'
+                    ];
+
+                    inputFields.forEach(field => {
+                        const fieldValue = userData[field];
+                        form.innerHTML += `
+                            <div class="input-field">
+                                <input type="text" name="${field}" id="${field}" value="${fieldValue}">
+                                <label for="${field}" class="active">${field}</label>
+                            </div>
+                        `;
+
+                        const inputElement = form.querySelector(`#${field}`);
+                        inputElement.addEventListener('input', function() {
+                            inputElement.setAttribute('value', inputElement.value);
+                        });
+                    });
+
+                    const idField =  document.querySelector('#identificador');
+                    if (idField) {
+                        idField.value = userId;
+                    }
+
+                    modalInstance.open();
+                });
+            });
+
+            const guardarBtn = document.querySelector('#guardarBtn');
+            guardarBtn.addEventListener('click', async function() {
+                const form = document.querySelector('#editForm');
+                const idField =  document.querySelector('#identificador');
+                const formData = new FormData(form);
+                const userId = idField.value;
+
+                if (userId !== null && userId !== "") {
+                    const response = await fetch(`/editar/${userId}`, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        modalInstance.close();
+                        location.reload();
+                    } else {
+                        console.error('Error al actualizar los datos');
+                    }
+                }
+            });
+
+            const descargarBtn = document.querySelector('#descargarBtn');
+            descargarBtn.addEventListener('click', function() {
+                const csvContent = [];
+                const table = document.querySelector('table');
+                const headerRow = table.querySelector('thead tr');
+                const headerColumns = headerRow.querySelectorAll('th:not(:last-child)');
+
+                const headerData = [];
+                headerColumns.forEach(column => {
+                    headerData.push(column.textContent.trim());
+                });
+                csvContent.push(headerData.join(','));
+
+                const rows = table.querySelectorAll('tbody tr');
+                rows.forEach(row => {
+                    const rowData = [];
+                    const columns = row.querySelectorAll('td:not(:last-child)');
+
+                    columns.forEach(column => {
+                        rowData.push(column.textContent.trim());
+                    });
+
+                    csvContent.push(rowData.join(','));
+                });
+
+                const blob = new Blob([csvContent.join('\n')], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'usuarios.csv';
+                a.click();
+
+                URL.revokeObjectURL(url);
+            });
+        });
+    </script>
+</body>
+</html>

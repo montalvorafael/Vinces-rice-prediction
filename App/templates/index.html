@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predicción de Producción Agrícola</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="static/css2/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <br><br>
+            <h1 class="header center light-blue-text">Predictor de la producción anual de arroz en Vinces</h1>
+            <div class="row center">
+                <h5 class="header col s12 light">Por favor rellene los datos con respecto a sus estimaciones para el proceso de cosecha de arroz en su finca<br></h5>
+            </div>
+            <form id="prediccionForm" method="post" action="/predict">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="ct_k510ha"><b>Ingrese la superficie sembrada en hectareas:</b></label>
+                        <br>
+                        <input placeholder="Superficie sembrada en hectareas" type="number" name="ct_k510ha" id="ct_k510ha" step="any" required>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <p><b>¿Preparación de suelo realizada?</b></p>
+                        <div>
+                            <label>
+                                <input type="radio" name="ct_prepa_suelo" value="1" required>
+                                <span>Sí</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_prepa_suelo" value="2" required>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="ct_k511ha"><b>Ingrese la superficie cosechada en hectareas:</b></label>
+                        <br>
+                        <input placeholder="Superficie cosechada en hectareas" type="number" name="ct_k511ha" id="ct_k511ha" step="any" required>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <p><b>Seleccione aquella que afectó su producción</b></p>
+                        <div>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="1" required>
+                                <span>Sequías</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="2" required>
+                                <span>Plagas</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="3" required>
+                                <span>Inundación</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="4" required>
+                                <span>Semillas</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="5" required>
+                                <span>Prácticas inadecuadas</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="6" required>
+                                <span>Edad de la Plantación</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_afecta_prod" value="7" required>
+                                <span>Otra</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="su_fertilizada"><b>Ingrese la superficie fertilizada en hectareas:</b></label>
+                        <br>
+                        <input placeholder="Superficie fertilizada en hectareas" type="number" name="su_fertilizada" id="su_fertilizada" step="any" required>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <p><b>¿Riego Realizado?</b></p>
+                        <div>
+                            <label>
+                                <input type="radio" name="ct_riego" value="1" required>
+                                <span>Sí</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_riego" value="2" required>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="ct_fqui_npk"><b>Ingrese la cantidad de fertilizante NPK en libras:</b></label>
+                        <br>
+                        <input placeholder="Fertilizante quimico NPK en libras" type="number" name="ct_fqui_npk" id="ct_fqui_npk" step="any" required>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <p><b>¿Uso de Fertilizante quimico?</b></p>
+                        <div>
+                            <label>
+                                <input type="radio" name="ct_fqui" value="1" required>
+                                <span>Sí</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_fqui" value="2" required>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="su_plaguicidas"><b>Ingrese las hectareas de plaguicidas usado:</b></label>
+                        <br>
+                        <input placeholder="Superficie cubierta de plaguicidas en hectareas" type="number" name="su_plaguicidas" id="su_plaguicidas" step="any" required>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <p><b>¿Uso de plaguicidas?</b></p>
+                        <div>
+                            <label>
+                                <input type="radio" name="ct_pqui" value="1" required>
+                                <span>Sí</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="ct_pqui" value="2" required>
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="ventas"><b>Ingrese las ventas proyectadas en hectareas:</b></label>
+                        <br>
+                        <input placeholder="Ventas proyectadas en hectareas" type="number" name="ventas" id="ventas" step="any" required>
+                    </div>
+                </div>
+
+                <div class="row center">
+                    <a button  type="submit" href="/usuario" class="btn-large waves-effect waves-light red">Volver<i class="material-icons right">keyboard_return</a></i></button>
+                    <button class="btn-large waves-effect waves-light light-blue" type="submit">Predecir<i class="material-icons right">send</i></button>
+
+                </div>
+            </form>
+
+            <p id="resultado"></p>
+
+
+        </div>
+    </div>
+
+    <script>
+    document.getElementById('prediccionForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const inputs = form.querySelectorAll('input[required]');
+        let isFormValid = true;
+
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                isFormValid = false;
+            }
+        });
+
+        if (isFormValid) {
+            fetch('/predict', {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Almacenar el resultado de la predicción en el localStorage
+                localStorage.setItem('resultadoPrediccion', data.prediccion.toFixed(2));
+                // Redirigir al usuario a resultados.html
+                window.location.href = 'resultados';
+            });
+        } else {
+            // Mostrar un mensaje de alerta si no se han completado todos los campos
+            alert('Por favor, llene todos los campos antes de continuar.');
+        }
+    });
+</script>
+</body>
+</html>

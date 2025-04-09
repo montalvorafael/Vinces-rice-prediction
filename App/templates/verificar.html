@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verificación de Contraseña</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="static/css2/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <br><br>
+            <h1 class="header center light-blue-text">Verificación de Contraseña</h1>
+            <form id="verificarForm" method="post">
+                <div class="row center">
+                    <div class="input-field col s6 offset-s3">
+                      <label for="password"><b>Contraseña:</label></b>
+                        <br>
+                        <input type="password" name="password" id="password" required>
+
+                    </div>
+                </div>
+                <div class="row center">
+                    <button type="button" class="btn-large waves-effect waves-light red" onclick="volver()">Volver<i class="material-icons right">keyboard_return</i></button>
+                    <button type="submit" class="btn-large waves-effect waves-light light-blue  "><i class="large material-icons left">account_box</i>Ingresar</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('verificarForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            if (password === 'agricultura') {
+                window.location.href = '/admin';
+            } else {
+                alert('Contraseña incorrecta');
+            }
+        });
+
+         function volver() {
+                        // Redirigir al usuario a la página 'login.html' al presionar el botón "Volver"
+                        window.location.href = 'login';
+                    }
+    </script>
+</body>
+</html>
